@@ -1,0 +1,6 @@
+sources:
+  - name: jaffle_shop
+    database: pb_raw
+    tables:
+      - name: customers
+      - name: orders
