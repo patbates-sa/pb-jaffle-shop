@@ -1,0 +1,22 @@
+models:
+- name: stg_stripe__payments
+  description: This model consolidates payment data from Stripe, providing a comprehensive
+    view of payment transactions. It includes details such as payment identifiers,
+    associated orders, payment methods, statuses, amounts, and creation dates, facilitating
+    financial analysis and reporting.
+  columns:
+  - name: payment_id
+    description: A unique identifier for each payment transaction.
+  - name: order_id
+    description: The identifier for the order associated with the payment.
+  - name: payment_method
+    description: The method used to process the payment, such as credit card or bank
+      transfer.
+  - name: status
+    description: The current status of the payment, indicating whether it is completed,
+      pending, or failed.
+  - name: amount
+    description: The total amount of the payment transaction, including any applicable
+      taxes or fees.
+  - name: created_at
+    description: The date and time when the payment was created, in UTC.
