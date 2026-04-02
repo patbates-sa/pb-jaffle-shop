@@ -1,0 +1,42 @@
+semantic_models:
+- name: dim_customers
+  description: A customer dimension table containing customer details and order information.
+  model: ref('dim_customers')
+  defaults:
+    agg_time_dimension: first_order_date
+  entities:
+  - name: customer_id
+    type: primary
+    expr: CUSTOMER_ID
+  dimensions:
+  - name: first_name
+    expr: FIRST_NAME
+    type: categorical
+  - name: last_name
+    expr: LAST_NAME
+    type: categorical
+  - name: first_order_date
+    expr: FIRST_ORDER_DATE
+    type: time
+    type_params:
+      time_granularity: day
+  - name: most_recent_order_date
+    expr: MOST_RECENT_ORDER_DATE
+    type: time
+    type_params:
+      time_granularity: day
+  measures:
+  - name: number_of_orders
+    description: The total number of orders placed by the customer.
+    agg: sum
+    create_metric: true
+    expr: NUMBER_OF_ORDERS
+  - name: lifetime_value
+    description: The total lifetime value of the customer.
+    agg: sum
+    create_metric: true
+    expr: LIFETIME_VALUE
+  - name: count_customer_id
+    agg: count
+    create_metric: true
+    expr: CUSTOMER_ID
