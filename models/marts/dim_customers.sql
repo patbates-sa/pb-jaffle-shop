@@ -13,6 +13,7 @@ customer_orders as (
         sum(amount) as lifetime_value
     from orders
     group by 1
+    order by 1
 ),
  final as (
     select
