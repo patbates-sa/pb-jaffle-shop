@@ -1,0 +1,45 @@
+semantic_models:
+  - name: dim_customers
+    description: Customer dimension with customer-level order history rollups.
+    model: ref('dim_customers')
+    defaults:
+      agg_time_dimension: first_order_date
+    entities:
+      - name: customer
+        type: primary
+        expr: customer_id
+    dimensions:
+      - name: first_name
+        type: categorical
+      - name: last_name
+        type: categorical
+      - name: first_order_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: most_recent_order_date
+        type: time
+        type_params:
+          time_granularity: day
+    measures:
+      - name: customer_order_count
+        description: Total number of orders attributed to customers in this model.
+        agg: sum
+        expr: number_of_orders
+      - name: customer_lifetime_value
+        description: Total lifetime value attributed to customers in this model.
+        agg: sum
+        expr: lifetime_value
+
+metrics:
+  - name: customer_order_count
+    label: Customer Order Count
+    type: simple
+    type_params:
+      measure: customer_order_count
+
+  - name: customer_lifetime_value
+    label: Customer Lifetime Value
+    type: simple
+    type_params:
+      measure: customer_lifetime_value
