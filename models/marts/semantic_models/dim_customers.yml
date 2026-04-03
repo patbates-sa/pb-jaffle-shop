@@ -1,4 +1,10 @@
 semantic_models:
+  - name: time_spine_day        # or your existing dim_date model
+    time_spine:
+      standard_granularity_column: date_day   # base column for joins
+    columns:
+      - name: date_day
+        granularity: day
   - name: dim_customers
     description: Customer dimension with customer-level order history rollups.
     model: ref('dim_customers')
