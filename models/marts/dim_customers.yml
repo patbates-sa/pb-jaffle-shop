@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: One row per customer with customer profile attributes and lifetime order value rollups.
+    time_spine:
+      standard_granularity_column: first_order_date
+    semantic_model:
+      enabled: true
+
+    columns:
+      - name: customer_id
+        description: Primary key for the customer dimension.
+        data_tests:
+          - not_null
+          - unique
+        entity:
+          name: customer
+          type: primary
+
+      - name: first_name
+        description: Customer first name.
+        dimension:
+          type: categorical
+
+      - name: last_name
+        description: Customer last name.
+        dimension:
+          type: categorical
+
+      - name: first_order_date
+        description: Date of the customer's first order.
+        granularity: day
+        dimension:
+          type: time
+
+      - name: most_recent_order_date
+        description: Date of the customer's most recent order.
+        granularity: day
+        dimension:
+          type: time
+    
+    metrics:
+      - name: order_count
+        type: simple
+        description: Total number of orders.
+        agg: sum
+        expr: number_of_orders
+
+      - name: lifetime_revenue
+        description: Total lifetime revenue attributed to this customer
+        agg: sum
+        expr: lifetime_value
