@@ -5,7 +5,7 @@ sources:
     description: A clone of a Postgres application database
     tables:
       - name: customers
-        description: Raw customer data
+        description: Raw customer source data
         columns:
           - name: id
             description: Primary key for the customer data
@@ -26,7 +26,7 @@ sources:
               count: 12
               period: hour
             error_after:
-              count: 3
+              count: 365
               period: day
           loaded_at_field: _etl_loaded_at
               
