@@ -26,7 +26,7 @@ sources:
               count: 12
               period: hour
             error_after:
-              count: 3
+              count: 365
               period: day
           loaded_at_field: _etl_loaded_at
               
