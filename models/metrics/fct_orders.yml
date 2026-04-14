@@ -11,21 +11,37 @@ models:
     columns:
       - name: order_id
         description: Primary key for the order fact.
+        data_tests:
+          - not_null
+          - unique
         entity:
           name: order
           type: primary
 
       - name: customer_id
         description: Customer associated with the order.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
         entity:
           name: customer
           type: foreign
 
       - name: order_date
         description: Date the order was placed.
+        data_tests:
+          - not_null
         granularity: day
         dimension:
           type: time
+
+      - name: amount
+        description: Total payment amount for the order. Defaults to 0 if no successful payment exists.
+        data_tests:
+          - not_null
 
     metrics:
       - name: num_orders
