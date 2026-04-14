@@ -28,6 +28,6 @@ sources:
             error_after:
               count: 365
               period: day
-          loaded_at_field: _etl_loaded_at
+          loaded_at_field: "_etl_loaded_at::timestamp_tz"
               
         
