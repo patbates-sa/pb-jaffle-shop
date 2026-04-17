@@ -39,7 +39,7 @@ models:
         granularity: day
         dimension:
           type: time
-    
+
     metrics:
       - name: order_count
         type: simple
