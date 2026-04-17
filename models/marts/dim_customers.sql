@@ -21,6 +21,19 @@ with
             customer_orders.most_recent_order_date,
             coalesce(customer_orders.number_of_orders, 0) as number_of_orders,
             customer_orders.lifetime_value,
+            case
+                when customer_orders.first_order_date is null then null
+                else coalesce(customer_orders.number_of_orders, 0)::float
+                / nullif(
+                    datediff(
+                        month,
+                        customer_orders.first_order_date,
+                        customer_orders.most_recent_order_date
+                    )
+                    + 1,
+                    0
+                )
+            end as average_monthly_orders
         from customers
         left join customer_orders using (customer_id)
     )
