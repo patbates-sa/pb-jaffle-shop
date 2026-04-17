@@ -20,6 +20,18 @@ with
             customer_orders.first_order_date,
             customer_orders.most_recent_order_date,
             coalesce(customer_orders.number_of_orders, 0) as number_of_orders,
+            case
+                when customer_orders.first_order_date is null then 0
+                else customer_orders.number_of_orders
+                / greatest(
+                    datediff(
+                        'month',
+                        customer_orders.first_order_date,
+                        customer_orders.most_recent_order_date
+                    ) + 1,
+                    1
+                )
+            end as average_monthly_orders,
             customer_orders.lifetime_value,
         from customers
         left join customer_orders using (customer_id)
