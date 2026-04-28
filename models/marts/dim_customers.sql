@@ -33,9 +33,17 @@ with
                     1
                 )
             end as average_monthly_orders,
-            customer_orders.lifetime_value,
+            customer_orders.lifetime_value
         from customers
         left join customer_orders using (customer_id)
     )
-select *
+select
+    customer_id,
+    first_name,
+    last_name,
+    first_order_date,
+    most_recent_order_date,
+    number_of_orders,
+    average_monthly_orders,
+    lifetime_value
 from final
