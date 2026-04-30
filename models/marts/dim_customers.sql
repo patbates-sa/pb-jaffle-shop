@@ -6,8 +6,8 @@ with
             customer_id,
             min(order_date) as first_order_date,
             max(order_date) as most_recent_order_date,
-            count(order_id) as number_of_orders,
-            sum(amount) as lifetime_value
+            cast(count(order_id) as number(18,0)) as number_of_orders,
+            cast(sum(amount) as number(38,6)) as lifetime_value
         from orders
         group by 1
         order by 1
@@ -19,21 +19,23 @@ with
             customers.last_name,
             customer_orders.first_order_date,
             customer_orders.most_recent_order_date,
-            coalesce(customer_orders.number_of_orders, 0) as number_of_orders,
-            case
-                when customer_orders.first_order_date is null then 0
-                else coalesce(customer_orders.number_of_orders, 0)
-                / greatest(
-                    datediff(
-                        month,
-                        customer_orders.first_order_date,
-                        customer_orders.most_recent_order_date
+            cast(coalesce(customer_orders.number_of_orders, 0) as number(18,0)) as number_of_orders,
+            cast(
+                case
+                    when customer_orders.first_order_date is null then 0
+                    else coalesce(customer_orders.number_of_orders, 0)
+                    / greatest(
+                        datediff(
+                            month,
+                            customer_orders.first_order_date,
+                            customer_orders.most_recent_order_date
+                        )
+                        + 1,
+                        1
                     )
-                    + 1,
-                    1
-                )
-            end as average_monthly_orders,
-            customer_orders.lifetime_value
+                end as number(24,6)
+            ) as average_monthly_orders,
+            cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value
         from customers
         left join customer_orders using (customer_id)
     )
