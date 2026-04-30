@@ -18,5 +18,5 @@ WITH dim_customers AS (
   FROM join_1
 )
 SELECT
-  *
+*
 FROM cust_fact_sql
