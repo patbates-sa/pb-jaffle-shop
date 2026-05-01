@@ -57,7 +57,8 @@ models:
 
       - name: average_monthly_orders
         description: Average orders per month across the inclusive span from first_order_date to most_recent_order_date.
-        data_type: number(24,6)
+        data_type: number(18,2)
+
 
       - name: lifetime_value
         description: Total lifetime revenue attributed to the customer.
