@@ -31,6 +31,5 @@ select
     first_order_date,
     most_recent_order_date,
     number_of_orders,
-    lifetime_value,
-    average_monthly_orders
+    lifetime_value
 from final
