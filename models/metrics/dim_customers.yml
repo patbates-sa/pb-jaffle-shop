@@ -59,10 +59,6 @@ models:
         description: Total lifetime revenue attributed to the customer.
         data_type: number(38,6)
 
-      - name: average_monthly_orders
-        description: Average orders per active month, calculated across the inclusive month span from first_order_date to most_recent_order_date.
-        data_type: number(38,6)
-
     metrics:
       - name: order_count
         type: simple
