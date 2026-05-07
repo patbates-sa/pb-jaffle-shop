@@ -30,7 +30,7 @@ models:
           - accepted_values:
               arguments:
                 values:
-                  - completed
+                  - completd
                   - shipped
                   - placed
                   - return_pending
