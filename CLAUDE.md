@@ -18,7 +18,7 @@ When the user references a Jira ticket — or simply opens one of these files an
 8. Post the same summary as a comment on the Jira ticket by sending it to dbt Command Center's local API. POST to `http://localhost:3000/api/jira/comment` with JSON body `{"ticketKey": "<TICKET-KEY>", "body": "<the same summary text>"}`. Use a heredoc or temp file when invoking `curl` so multi-line content is escaped safely. Example with a temp file:
    ```bash
    cat > /tmp/jira-comment.json <<'EOF'
-   {"ticketKey": "KAN-X", "body": "...summary text with\nnewlines..."}
+   {"ticketKey": "<TICKET-KEY>", "body": "...summary text with\nnewlines..."}
    EOF
    curl -s -X POST -H 'Content-Type: application/json' --data @/tmp/jira-comment.json http://localhost:3000/api/jira/comment
    ```
