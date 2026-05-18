@@ -59,6 +59,11 @@ models:
         description: Total lifetime revenue attributed to the customer.
         data_type: number(38,6)
 
+      # KAN-8: average monthly orders column with non-negative test
+      - name: average_monthly_orders
+        description: Average number of orders per month, calculated over the span from first to most recent order date.
+        data_type: number(18,6)
+
     metrics:
       - name: order_count
         type: simple
