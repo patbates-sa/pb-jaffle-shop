@@ -20,20 +20,7 @@ with
             customer_orders.first_order_date,
             customer_orders.most_recent_order_date,
             cast(coalesce(customer_orders.number_of_orders, 0) as number(18,0)) as number_of_orders,
-            cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value,
-            -- KAN-9: orders per month over span from first to most recent order date
-            cast(
-                customer_orders.number_of_orders
-                / nullif(
-                    datediff(
-                        'month',
-                        customer_orders.first_order_date,
-                        customer_orders.most_recent_order_date
-                    ),
-                    0
-                )
-                as number(18,6)
-            ) as average_monthly_orders
+            cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value
         from customers
         left join customer_orders using (customer_id)
     )
@@ -44,7 +31,5 @@ select
     first_order_date,
     most_recent_order_date,
     number_of_orders,
-    lifetime_value,
-    -- KAN-9: expose average_monthly_orders in final select
-    average_monthly_orders
+    lifetime_value
 from final

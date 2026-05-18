@@ -59,11 +59,6 @@ models:
         description: Total lifetime revenue attributed to the customer.
         data_type: number(38,6)
 
-      # KAN-9: average monthly orders column added to contract and semantic model
-      - name: average_monthly_orders
-        description: Average number of orders per month, calculated over the span from first to most recent order date.
-        data_type: number(18,6)
-
     metrics:
       - name: order_count
         type: simple
@@ -76,12 +71,4 @@ models:
         description: Total lifetime revenue attributed to this customer
         agg: sum
         expr: lifetime_value
-        agg_time_dimension: first_order_date
-
-      # KAN-9: metric for the new average_monthly_orders measure
-      - name: average_monthly_orders
-        type: simple
-        description: Average of customers' average monthly order rate.
-        agg: average
-        expr: average_monthly_orders
         agg_time_dimension: first_order_date
