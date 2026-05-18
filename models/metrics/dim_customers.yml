@@ -59,6 +59,11 @@ models:
         description: Total lifetime revenue attributed to the customer.
         data_type: number(38,6)
 
+      # DBT-16: average monthly orders column (non-negative test lives in tests/)
+      - name: avg_monthly_orders
+        description: Average number of orders per month across the customer's active order window (first to most recent order, inclusive).
+        data_type: number(18,6)
+
     metrics:
       - name: order_count
         type: simple
@@ -71,4 +76,12 @@ models:
         description: Total lifetime revenue attributed to this customer
         agg: sum
         expr: lifetime_value
+        agg_time_dimension: first_order_date
+
+      # DBT-16: metric exposing avg_monthly_orders as a simple average
+      - name: avg_monthly_orders
+        type: simple
+        description: Average of avg_monthly_orders across customers.
+        agg: average
+        expr: avg_monthly_orders
         agg_time_dimension: first_order_date
