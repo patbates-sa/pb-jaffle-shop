@@ -1,0 +1,91 @@
+# KAN-10: semantic model for cust_fact exposing all upstream measures as cf_-prefixed metrics
+version: 2
+
+models:
+  - name: cust_fact
+    description: Customer-order fact joining dim_customers and fct_orders at the order grain.
+
+    semantic_model:
+      enabled: true
+
+    columns:
+      - name: customer_id
+        description: Customer associated with the order (primary entity for this semantic model).
+        entity:
+          name: customer
+          type: primary
+
+      - name: order_id
+        description: Order identifier (joins to the order entity owned by fct_orders).
+        entity:
+          name: order
+          type: unique
+
+      - name: order_date
+        description: Date the order was placed.
+        granularity: day
+        dimension:
+          type: time
+
+      - name: amount
+        description: Payment amount for the order.
+
+      - name: number_of_orders
+        description: Total number of orders placed by the customer (denormalized from dim_customers).
+
+      - name: lifetime_value
+        description: Total lifetime revenue attributed to the customer (denormalized from dim_customers).
+
+      - name: average_monthly_orders
+        description: Customer's average monthly order rate (denormalized from dim_customers).
+
+    metrics:
+      # KAN-10: order-grain metrics mirroring fct_orders measures
+      - name: cf_num_orders
+        type: simple
+        description: Total number of orders.
+        label: CF Order Count
+        agg: count
+        expr: 1
+        agg_time_dimension: order_date
+
+      - name: cf_order_revenue
+        type: simple
+        description: Total payment amount collected across orders.
+        label: CF Order Revenue
+        agg: sum
+        expr: amount
+        agg_time_dimension: order_date
+
+      - name: cf_average_order_value
+        type: simple
+        description: Average payment amount per order.
+        label: CF Average Order Value
+        agg: average
+        expr: amount
+        agg_time_dimension: order_date
+
+      # KAN-10: customer-attribute metrics mirroring dim_customers measures (denormalized at order grain)
+      - name: cf_order_count
+        type: simple
+        description: Sum of denormalized per-customer order counts (warning - inflates at order grain).
+        label: CF Customer Order Count
+        agg: sum
+        expr: number_of_orders
+        agg_time_dimension: order_date
+
+      - name: cf_lifetime_revenue
+        type: simple
+        description: Sum of denormalized per-customer lifetime revenue (warning - inflates at order grain).
+        label: CF Customer Lifetime Revenue
+        agg: sum
+        expr: lifetime_value
+        agg_time_dimension: order_date
+
+      - name: cf_average_monthly_orders
+        type: simple
+        description: Average of denormalized per-customer average monthly order rate.
+        label: CF Average Monthly Orders
+        agg: average
+        expr: average_monthly_orders
+        agg_time_dimension: order_date
