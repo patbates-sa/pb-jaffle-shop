@@ -59,6 +59,11 @@ models:
         description: Total lifetime revenue attributed to the customer.
         data_type: number(38,6)
 
+      # KAN-12: average monthly orders per customer, exposed via the average_monthly_orders metric below
+      - name: avg_monthly_orders
+        description: Average orders per month, computed as number_of_orders divided by the months between first_order_date and most_recent_order_date.
+        data_type: number(38,6)
+
     metrics:
       - name: order_count
         type: simple
@@ -71,4 +76,13 @@ models:
         description: Total lifetime revenue attributed to this customer
         agg: sum
         expr: lifetime_value
+        agg_time_dimension: first_order_date
+
+      # KAN-12: metric exposing the average-monthly-orders measure across customers
+      - name: average_monthly_orders
+        type: simple
+        description: Average of customers' average monthly orders.
+        label: Average Monthly Orders
+        agg: average
+        expr: avg_monthly_orders
         agg_time_dimension: first_order_date
