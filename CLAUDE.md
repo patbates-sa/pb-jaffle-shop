@@ -26,13 +26,13 @@ When the user references a Jira ticket — or simply opens one of these files an
 9. **Required.** Immediately after step 8 succeeds, ask the user whether to commit. Do not end your turn until you have asked this. The prompt must be visually prominent — render it on its own with a level-3 heading and a bold question line, exactly like this:
 
    ```
-   ### 🚦 Confirm commit
+   ### 🚦 Confirm commit & sync
 
-   **Commit these changes with message `<TICKET-KEY>: <short description of what changed>`? (y/n)**
+   **Commit & sync these changes with message `<TICKET-KEY>: <short description of what changed>`? (y/n)**
    ```
 
    Then wait for the reply.
-10. If the user answers yes (y/yes/Y), run `git add -A` then `git commit -m '<TICKET-KEY>: <short description>'` and report the commit hash, then proceed to step 11. If no, skip the commit and acknowledge — this is the last step (do not run steps 11 or 12).
+10. If the user answers yes (y/yes/Y), run `git add -A`, then `git commit -m '<TICKET-KEY>: <short description>'`, then `git push -u origin HEAD` to sync to origin. Report the commit hash and confirm the push succeeded, then proceed to step 11. If no, skip the commit and acknowledge — this is the last step (do not run steps 11 or 12).
 11. **Required if step 10 produced a commit.** Immediately ask the user whether to open a pull request to merge into `main`. Do not end your turn until you have asked. The prompt must be visually prominent — render it on its own with a level-3 heading and a bold question line, exactly like this (substitute `<current-branch>` with the output of `git rev-parse --abbrev-ref HEAD`):
 
     ```
@@ -42,6 +42,6 @@ When the user references a Jira ticket — or simply opens one of these files an
     ```
 
     Then wait for the reply.
-12. If the user answers yes (y/yes/Y), push the current branch with `git push -u origin HEAD`, then run `gh pr create --base main --fill` and report the PR URL. If no, skip the PR and acknowledge. Either way, this is the last step.
+12. If the user answers yes (y/yes/Y), run `gh pr create --base main --fill` and report the PR URL (the branch is already pushed from step 10). If no, skip the PR and acknowledge. Either way, this is the last step.
 
 <!-- /dbt-command-center: jira-tasks -->
