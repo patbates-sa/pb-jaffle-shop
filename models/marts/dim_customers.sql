@@ -20,24 +20,7 @@ with
             customer_orders.first_order_date,
             customer_orders.most_recent_order_date,
             cast(coalesce(customer_orders.number_of_orders, 0) as number(18,0)) as number_of_orders,
-            cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value,
-            -- DBT-16: average monthly orders across the customer's active order window
-            cast(
-                case
-                    when customer_orders.number_of_orders is null
-                        or customer_orders.number_of_orders = 0
-                        then 0
-                    else customer_orders.number_of_orders
-                        / greatest(
-                            datediff(
-                                month,
-                                customer_orders.first_order_date,
-                                customer_orders.most_recent_order_date
-                            ) + 1,
-                            1
-                        )
-                end as number(18,6)
-            ) as avg_monthly_orders
+            cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value
         from customers
         left join customer_orders using (customer_id)
     )
@@ -48,7 +31,5 @@ select
     first_order_date,
     most_recent_order_date,
     number_of_orders,
-    lifetime_value,
-    -- DBT-16: expose avg_monthly_orders in final select
-    avg_monthly_orders
+    lifetime_value
 from final
