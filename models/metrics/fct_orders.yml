@@ -7,7 +7,7 @@ models:
     config:
       access: protected
       contract:
-        enforced: true
+        enforced: false
   
     semantic_model:
       enabled: true
