@@ -14,7 +14,8 @@ WITH dim_customers AS (
     USING (CUSTOMER_ID)
 ), cust_fact_sql AS (
   SELECT
-    *
+    *,
+    first_name as name
   FROM join_1
 )
 SELECT
