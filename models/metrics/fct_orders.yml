@@ -16,6 +16,7 @@ models:
     columns:
       - name: order_id
         description: Primary key for the order fact.
+        data_type: int
         data_tests:
           - not_null
           - unique
@@ -23,8 +24,16 @@ models:
           name: order
           type: primary
 
+      - name: new_order_id
+        description: New Primary key for the order fact.
+        data_type: int
+        data_tests:
+          - not_null
+          - unique
+
       - name: customer_id
         description: Customer associated with the order.
+        data_type: int
         data_tests:
           - not_null
           - relationships:
@@ -37,6 +46,7 @@ models:
 
       - name: order_date
         description: Date the order was placed.
+        data_type: date
         data_tests:
           - not_null
         granularity: day
@@ -45,6 +55,7 @@ models:
 
       - name: amount
         description: Total payment amount for the order. Defaults to 0 if no successful payment exists.
+        data_type: number(38,6)
         data_tests:
           - not_null
 
