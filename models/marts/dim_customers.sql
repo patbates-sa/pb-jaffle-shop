@@ -15,11 +15,6 @@ with
     final as (
         select
             customers.customer_id,
-            customers.customer_id as unique_id,
-            customers.customer_id as new_id,
-            customers.customer_id as newest_id,
-            customers.customer_id as fourth_id,
-            customers.customer_id as fifth_id,
             customers.first_name,
             customers.last_name,
             customer_orders.first_order_date,
@@ -31,11 +26,6 @@ with
     )
 select
     customer_id,
-    unique_id,
-    new_id,
-    newest_id,
-    fourth_id,
-    fifth_id,
     first_name,
     last_name,
     first_order_date,
