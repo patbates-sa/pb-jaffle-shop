@@ -16,6 +16,7 @@ with
         select
             customers.customer_id,
             customers.customer_id as unique_id,
+            customers.customer_id as new_id,
             customers.first_name,
             customers.last_name,
             customer_orders.first_order_date,
