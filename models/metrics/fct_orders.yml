@@ -3,6 +3,11 @@ version: 2
 models:
   - name: fct_orders
     description: One row per order with the customer key, order date, and collected payment amount.
+
+    config:
+      access: protected
+      contract:
+        enforced: true
   
     semantic_model:
       enabled: true
