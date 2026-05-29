@@ -31,6 +31,11 @@ with
     )
 select
     customer_id,
+    unique_id,
+    new_id,
+    newest_id,
+    fourth_id,
+    fifth_id,
     first_name,
     last_name,
     first_order_date,
