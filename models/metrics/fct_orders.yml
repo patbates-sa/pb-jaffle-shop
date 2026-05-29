@@ -24,13 +24,6 @@ models:
           name: order
           type: primary
 
-      - name: new_order_id
-        description: New Primary key for the order fact.
-        data_type: int
-        data_tests:
-          - not_null
-          - unique
-
       - name: customer_id
         description: Customer associated with the order.
         data_type: int
