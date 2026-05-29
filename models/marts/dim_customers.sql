@@ -20,7 +20,8 @@ with
             customer_orders.first_order_date,
             customer_orders.most_recent_order_date,
             cast(coalesce(customer_orders.number_of_orders, 0) as number(18,0)) as number_of_orders,
-            cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value
+            cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value,
+            customers.customer_id as unique_id
         from customers
         left join customer_orders using (customer_id)
     )
