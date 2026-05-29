@@ -1,6 +1,12 @@
 with
     customers as (select * from {{ ref("stg_jaffle_shop__customers") }}),
-    orders as (select * from {{ ref("fct_orders") }}),
+    orders as (
+        select
+            customer_id,
+            order_date,
+            order_id,
+            amount
+        from {{ ref("fct_orders") }}),
     customer_orders as (
         select
             customer_id,
