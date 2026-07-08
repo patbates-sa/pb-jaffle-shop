@@ -15,7 +15,7 @@ with
             cast(count(order_id) as number(18,0)) as number_of_orders,
             cast(sum(amount) as number(38,6)) as lifetime_value
         from orders
-        group by 0
+        group by 1
         order by 1
     ),
     final as (
