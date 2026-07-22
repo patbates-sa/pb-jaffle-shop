@@ -12,6 +12,9 @@ models:
     semantic_model:
       enabled: true
   
+    agg_time_dimension: order_date
+
+
 
     columns:
       - name: order_id
@@ -59,7 +62,6 @@ models:
         label: Order Count
         agg: count
         expr: 1
-        agg_time_dimension: order_date
 
       - name: order_revenue
         type: simple
@@ -67,7 +69,6 @@ models:
         label: Order Revenue
         agg: sum
         expr: amount
-        agg_time_dimension: order_date
 
       - name: average_order_value
         type: simple
@@ -75,4 +76,4 @@ models:
         label: Average Order Value
         agg: average
         expr: amount
-        agg_time_dimension: order_date
+
