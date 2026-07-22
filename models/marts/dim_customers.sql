@@ -7,14 +7,6 @@ with
             order_id,
             amount
         from {{ ref("fct_orders") }}),
-    customer_monthly_orders as (
-        select
-            customer_id,
-            date_trunc('month', order_date) as order_month,
-            cast(count(order_id) as number(18,0)) as orders_in_month
-        from orders
-        group by 1, 2
-    ),
     customer_orders as (
         select
             customer_id,
@@ -26,14 +18,6 @@ with
         group by customer_id
 
     ),
-    customer_order_stats as (
-        select
-            customer_id,
-            cast(avg(orders_in_month) as number(38,6)) as average_monthly_orders,
-            cast(max(orders_in_month) as number(38,6)) as max_monthly_orders
-        from customer_monthly_orders
-        group by customer_id
-    ),
     final as (
         select
             customers.customer_id,
@@ -42,12 +26,9 @@ with
             customer_orders.first_order_date,
             customer_orders.most_recent_order_date,
             cast(coalesce(customer_orders.number_of_orders, 0) as number(18,0)) as number_of_orders,
-            cast(coalesce(customer_order_stats.average_monthly_orders, 0) as number(38,6)) as average_monthly_orders,
-            cast(coalesce(customer_order_stats.max_monthly_orders, 0) as number(38,6)) as max_monthly_orders,
             cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value
         from customers
         left join customer_orders using (customer_id)
-        left join customer_order_stats using (customer_id)
     )
 select
     customer_id,
@@ -56,7 +37,5 @@ select
     first_order_date,
     most_recent_order_date,
     number_of_orders,
-    average_monthly_orders,
-    max_monthly_orders,
     lifetime_value
 from final
