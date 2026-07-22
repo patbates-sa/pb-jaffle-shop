@@ -34,10 +34,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   pb_jaffle_shop:
-    +state:
-      lag_tolerance: "45m"
-      require_fresh_data_from: any
     +static_analysis: strict
+    +schema: analytics
+
     staging:
       +materialized: view
 
