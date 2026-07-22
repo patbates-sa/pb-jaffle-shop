@@ -12,6 +12,9 @@ models:
     semantic_model:
       enabled: true
 
+    agg_time_dimension: first_order_date
+
+
     columns:
       - name: customer_id
         description: Primary key for the customer dimension.
@@ -73,10 +76,9 @@ models:
         description: Total number of orders.
         agg: sum
         expr: number_of_orders
-        agg_time_dimension: first_order_date
 
       - name: lifetime_revenue
         description: Total lifetime revenue attributed to this customer
         agg: sum
         expr: lifetime_value
-        agg_time_dimension: first_order_date
+
