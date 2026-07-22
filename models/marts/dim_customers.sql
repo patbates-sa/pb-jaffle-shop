@@ -15,8 +15,8 @@ with
             cast(count(order_id) as number(18,0)) as number_of_orders,
             cast(sum(amount) as number(38,6)) as lifetime_value
         from orders
-        group by 1
-        order by 1
+        group by customer_id
+  
     ),
     final as (
         select
@@ -26,6 +26,34 @@ with
             customer_orders.first_order_date,
             customer_orders.most_recent_order_date,
             cast(coalesce(customer_orders.number_of_orders, 0) as number(18,0)) as number_of_orders,
+            cast(
+                case
+                    when customer_orders.first_order_date is null then null
+                    else customer_orders.number_of_orders::float
+                    / nullif(
+                        datediff(
+                            month,
+                            customer_orders.first_order_date,
+                            customer_orders.most_recent_order_date
+                        ) + 1,
+                        0
+                    )
+                end as number(38,6)
+            ) as average_monthly_orders,
+            cast(
+                case
+                    when customer_orders.first_order_date is null then null
+                    else customer_orders.number_of_orders::float
+                    / nullif(
+                        datediff(
+                            month,
+                            customer_orders.first_order_date,
+                            customer_orders.most_recent_order_date
+                        ) + 1,
+                        0
+                    )
+                end as number(38,6)
+            ) as max_monthly_orders,
             cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value
         from customers
         left join customer_orders using (customer_id)
@@ -37,5 +65,7 @@ select
     first_order_date,
     most_recent_order_date,
     number_of_orders,
+    average_monthly_orders,
+    max_monthly_orders,
     lifetime_value
 from final

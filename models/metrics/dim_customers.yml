@@ -12,6 +12,9 @@ models:
     semantic_model:
       enabled: true
 
+    agg_time_dimension: first_order_date
+
+
     columns:
       - name: customer_id
         description: Primary key for the customer dimension.
@@ -55,6 +58,17 @@ models:
         description: Total number of orders placed by the customer.
         data_type: number(18,0)
 
+<<<<<<< HEAD
+=======
+      - name: average_monthly_orders
+        description: Average number of orders per month across the inclusive span from first_order_date to most_recent_order_date.
+        data_type: number(38,6)
+
+      - name: max_monthly_orders
+        description: Number of orders divided by the inclusive month span from first_order_date to most_recent_order_date.
+        data_type: number(38,6)
+
+>>>>>>> a018d372a1bd2d1b4c1e2670d00956a4db4a58cd
       - name: lifetime_value
         description: Total lifetime revenue attributed to the customer.
         data_type: number(38,6)
@@ -65,10 +79,9 @@ models:
         description: Total number of orders.
         agg: sum
         expr: number_of_orders
-        agg_time_dimension: first_order_date
 
       - name: lifetime_revenue
         description: Total lifetime revenue attributed to this customer
         agg: sum
         expr: lifetime_value
-        agg_time_dimension: first_order_date
+
