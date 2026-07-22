@@ -58,8 +58,6 @@ models:
         description: Total number of orders placed by the customer.
         data_type: number(18,0)
 
-<<<<<<< HEAD
-=======
       - name: average_monthly_orders
         description: Average number of orders per month across the inclusive span from first_order_date to most_recent_order_date.
         data_type: number(38,6)
@@ -68,7 +66,6 @@ models:
         description: Number of orders divided by the inclusive month span from first_order_date to most_recent_order_date.
         data_type: number(38,6)
 
->>>>>>> a018d372a1bd2d1b4c1e2670d00956a4db4a58cd
       - name: lifetime_value
         description: Total lifetime revenue attributed to the customer.
         data_type: number(38,6)
@@ -81,7 +78,7 @@ models:
         expr: number_of_orders
 
       - name: lifetime_revenue
+        type: simple
         description: Total lifetime revenue attributed to this customer
         agg: sum
         expr: lifetime_value
-
