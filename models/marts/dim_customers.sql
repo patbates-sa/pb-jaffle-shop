@@ -26,20 +26,6 @@ with
             customer_orders.first_order_date,
             customer_orders.most_recent_order_date,
             cast(coalesce(customer_orders.number_of_orders, 0) as number(18,0)) as number_of_orders,
-            cast(
-                coalesce(
-                    customer_orders.number_of_orders
-                    / nullif(
-                        datediff(
-                            month,
-                            customer_orders.first_order_date,
-                            customer_orders.most_recent_order_date
-                        ) + 1,
-                        0
-                    ),
-                    0
-                ) as number(18,2)
-            ) as average_monthly_orders,
             cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value
         from customers
         left join customer_orders using (customer_id)
@@ -51,6 +37,5 @@ select
     first_order_date,
     most_recent_order_date,
     number_of_orders,
-    average_monthly_orders,
     lifetime_value
 from final
