@@ -7,13 +7,9 @@ models:
       access: public
       contract:
         enforced: true
-    time_spine:
-      standard_granularity_column: first_order_date
     semantic_model:
       enabled: true
-
     agg_time_dimension: first_order_date
-
 
     columns:
       - name: customer_id
@@ -58,6 +54,10 @@ models:
         description: Total number of orders placed by the customer.
         data_type: number(18,0)
 
+      - name: average_monthly_orders
+        description: Average monthly orders across the inclusive month span from first order date to most recent order date.
+        data_type: number(18,2)
+
       - name: lifetime_value
         description: Total lifetime revenue attributed to the customer.
         data_type: number(38,6)
@@ -66,11 +66,14 @@ models:
       - name: order_count
         type: simple
         description: Total number of orders.
+        label: Customer Order Count
+
         agg: sum
         expr: number_of_orders
 
       - name: lifetime_revenue
         type: simple
         description: Total lifetime revenue attributed to this customer
+        label: Lifetime Revenue
         agg: sum
         expr: lifetime_value
