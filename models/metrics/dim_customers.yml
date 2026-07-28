@@ -7,13 +7,9 @@ models:
       access: public
       contract:
         enforced: true
-    time_spine:
-      standard_granularity_column: first_order_date
     semantic_model:
       enabled: true
-
     agg_time_dimension: first_order_date
-
 
     columns:
       - name: customer_id
@@ -58,32 +54,38 @@ models:
         description: Total number of orders placed by the customer.
         data_type: number(18,0)
 
+      - name: max_number_of_orders
+        description: Maximum number of orders for the customer. At customer grain, this equals number_of_orders.
+        data_type: number(18,0)
+
+      - name: avg_monthly_orders
+        description: Average number of orders per month between the customer's first and most recent order months.
+        data_type: number(18,6)
+
       - name: lifetime_value
         description: Total lifetime revenue attributed to the customer.
-        data_type: number(38,6)
-
-      # DBT-19: new column exposing average monthly orders
-      - name: average_monthly_orders
-        description: Average number of orders placed per month over the customer's active span (first order date through most recent order date, inclusive).
         data_type: number(38,6)
 
     metrics:
       - name: order_count
         type: simple
         description: Total number of orders.
+        label: Customer Order Count
+
         agg: sum
         expr: number_of_orders
 
       - name: lifetime_revenue
         type: simple
         description: Total lifetime revenue attributed to this customer
+        label: Lifetime Revenue
         agg: sum
         expr: lifetime_value
 
-      # DBT-19: new metric/measure over the average_monthly_orders column
-      - name: avg_monthly_orders
+      # DBT-19: new metric/measure over the avg_monthly_orders column
+      - name: avg_monthly_orders_metric
         type: simple
         description: Average of each customer's average monthly order rate.
         label: Average Monthly Orders
         agg: average
-        expr: average_monthly_orders
+        expr: avg_monthly_orders

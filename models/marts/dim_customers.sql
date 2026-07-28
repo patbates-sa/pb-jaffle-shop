@@ -16,7 +16,6 @@ with
             cast(sum(amount) as number(38,6)) as lifetime_value
         from orders
         group by customer_id
-
     ),
     final as (
         select
@@ -26,13 +25,19 @@ with
             customer_orders.first_order_date,
             customer_orders.most_recent_order_date,
             cast(coalesce(customer_orders.number_of_orders, 0) as number(18,0)) as number_of_orders,
-            cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value,
-            -- DBT-19: average monthly orders = orders / inclusive month span between first and most recent order
+            cast(coalesce(customer_orders.number_of_orders, 0) as number(18,0)) as max_number_of_orders,
             cast(
-                customer_orders.number_of_orders
-                / (datediff('month', customer_orders.first_order_date, customer_orders.most_recent_order_date) + 1)
-                as number(38,6)
-            ) as average_monthly_orders
+                coalesce(
+                    customer_orders.number_of_orders::number(18,6)
+                    / nullif(
+                        (datediff(month, customer_orders.first_order_date, customer_orders.most_recent_order_date) + 1)::number(18,6),
+                        0
+                    ),
+                    0
+                ) as number(18,6)
+            ) as avg_monthly_orders,
+
+            cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value
         from customers
         left join customer_orders using (customer_id)
     )
@@ -43,7 +48,7 @@ select
     first_order_date,
     most_recent_order_date,
     number_of_orders,
-    lifetime_value,
-    -- DBT-19: expose average monthly orders column
-    average_monthly_orders
+    max_number_of_orders,
+    avg_monthly_orders,
+    lifetime_value
 from final
