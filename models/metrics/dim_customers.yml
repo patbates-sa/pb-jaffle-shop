@@ -58,10 +58,6 @@ models:
         description: Maximum number of orders for the customer. At customer grain, this equals number_of_orders.
         data_type: number(18,0)
 
-      - name: avg_monthly_orders
-        description: Average number of orders per month between the customer's first and most recent order months.
-        data_type: number(18,6)
-
       - name: lifetime_value
         description: Total lifetime revenue attributed to the customer.
         data_type: number(38,6)
@@ -81,11 +77,3 @@ models:
         label: Lifetime Revenue
         agg: sum
         expr: lifetime_value
-
-      # DBT-19: new metric/measure over the avg_monthly_orders column
-      - name: avg_monthly_orders_metric
-        type: simple
-        description: Average of each customer's average monthly order rate.
-        label: Average Monthly Orders
-        agg: average
-        expr: avg_monthly_orders
