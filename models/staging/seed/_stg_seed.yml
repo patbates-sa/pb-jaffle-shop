@@ -1,0 +1,25 @@
+models:
+  - name: stg_seed__declared_holidays
+    description: One declared market holiday or early-close event per holiday date and jurisdiction.
+    columns:
+      - name: declared_holiday_id
+        description: Deterministic primary key generated from the holiday date and jurisdiction.
+        data_tests:
+          - unique
+          - not_null
+      - name: holiday_date
+        description: Calendar date on which the market closure or early close occurs.
+      - name: holiday_name
+        description: Business-facing name of the holiday or closure event.
+      - name: jurisdiction
+        description: Two-character jurisdiction code for the affected market.
+      - name: closure_type
+        description: Whether the market has a full closure or closes early.
+      - name: is_early_close
+        description: Boolean indicating that the market closes early rather than remaining closed all day.
+      - name: declared_at
+        description: Date on which calendar governance declared the closure.
+      - name: declared_by
+        description: Team or authority responsible for recording the declaration.
+      - name: source_reference
+        description: Reference identifier for the source schedule or declaration.

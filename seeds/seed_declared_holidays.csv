@@ -1,0 +1,57 @@
+holiday_date,holiday_name,jurisdiction,closure_type,is_early_close,declared_at,declared_by,source_reference
+2025-01-01,New Year's Day,US,full_closure,false,2024-06-01,calendar_governance,SIFMA-2025-SCHEDULE
+2025-01-09,National Day of Mourning - President Carter,US,full_closure,false,2024-12-30,calendar_governance,EO-14889
+2025-01-20,Martin Luther King Jr. Day,US,full_closure,false,2024-06-01,calendar_governance,SIFMA-2025-SCHEDULE
+2025-02-17,Washington's Birthday,US,full_closure,false,2024-06-01,calendar_governance,SIFMA-2025-SCHEDULE
+2025-04-18,Good Friday,US,full_closure,false,2024-06-01,calendar_governance,SIFMA-2025-SCHEDULE
+2025-05-26,Memorial Day,US,full_closure,false,2024-06-01,calendar_governance,SIFMA-2025-SCHEDULE
+2025-06-19,Juneteenth National Independence Day,US,full_closure,false,2024-06-01,calendar_governance,SIFMA-2025-SCHEDULE
+2025-07-03,Independence Day - early close,US,early_close,true,2024-06-01,calendar_governance,SIFMA-2025-SCHEDULE
+2025-07-04,Independence Day,US,full_closure,false,2024-06-01,calendar_governance,SIFMA-2025-SCHEDULE
+2025-09-01,Labor Day,US,full_closure,false,2024-06-01,calendar_governance,SIFMA-2025-SCHEDULE
+2025-11-27,Thanksgiving Day,US,full_closure,false,2024-06-01,calendar_governance,SIFMA-2025-SCHEDULE
+2025-11-28,Day after Thanksgiving - early close,US,early_close,true,2024-06-01,calendar_governance,SIFMA-2025-SCHEDULE
+2025-12-24,Christmas Eve - early close,US,early_close,true,2024-06-01,calendar_governance,SIFMA-2025-SCHEDULE
+2025-12-25,Christmas Day,US,full_closure,false,2024-06-01,calendar_governance,SIFMA-2025-SCHEDULE
+2026-01-01,New Year's Day,US,full_closure,false,2025-06-02,calendar_governance,SIFMA-2026-SCHEDULE
+2026-01-19,Martin Luther King Jr. Day,US,full_closure,false,2025-06-02,calendar_governance,SIFMA-2026-SCHEDULE
+2026-02-16,Washington's Birthday,US,full_closure,false,2025-06-02,calendar_governance,SIFMA-2026-SCHEDULE
+2026-04-03,Good Friday,US,full_closure,false,2025-06-02,calendar_governance,SIFMA-2026-SCHEDULE
+2026-05-25,Memorial Day,US,full_closure,false,2025-06-02,calendar_governance,SIFMA-2026-SCHEDULE
+2026-06-19,Juneteenth National Independence Day,US,full_closure,false,2025-06-02,calendar_governance,SIFMA-2026-SCHEDULE
+2026-07-03,Independence Day - observed,US,full_closure,false,2025-06-02,calendar_governance,SIFMA-2026-SCHEDULE
+2026-09-07,Labor Day,US,full_closure,false,2025-06-02,calendar_governance,SIFMA-2026-SCHEDULE
+2026-11-26,Thanksgiving Day,US,full_closure,false,2025-06-02,calendar_governance,SIFMA-2026-SCHEDULE
+2026-11-27,Day after Thanksgiving - early close,US,early_close,true,2025-06-02,calendar_governance,SIFMA-2026-SCHEDULE
+2026-12-24,Christmas Eve - early close,US,early_close,true,2025-06-02,calendar_governance,SIFMA-2026-SCHEDULE
+2026-12-25,Christmas Day,US,full_closure,false,2025-06-02,calendar_governance,SIFMA-2026-SCHEDULE
+2027-01-01,New Year's Day,US,full_closure,false,2026-06-01,calendar_governance,SIFMA-2027-SCHEDULE
+2027-01-18,Martin Luther King Jr. Day,US,full_closure,false,2026-06-01,calendar_governance,SIFMA-2027-SCHEDULE
+2027-02-15,Washington's Birthday,US,full_closure,false,2026-06-01,calendar_governance,SIFMA-2027-SCHEDULE
+2027-03-26,Good Friday,US,full_closure,false,2026-06-01,calendar_governance,SIFMA-2027-SCHEDULE
+2027-05-31,Memorial Day,US,full_closure,false,2026-06-01,calendar_governance,SIFMA-2027-SCHEDULE
+2027-06-18,Juneteenth - observed,US,full_closure,false,2026-06-01,calendar_governance,SIFMA-2027-SCHEDULE
+2027-07-05,Independence Day - observed,US,full_closure,false,2026-06-01,calendar_governance,SIFMA-2027-SCHEDULE
+2027-09-06,Labor Day,US,full_closure,false,2026-06-01,calendar_governance,SIFMA-2027-SCHEDULE
+2027-11-25,Thanksgiving Day,US,full_closure,false,2026-06-01,calendar_governance,SIFMA-2027-SCHEDULE
+2027-11-26,Day after Thanksgiving - early close,US,early_close,true,2026-06-01,calendar_governance,SIFMA-2027-SCHEDULE
+2027-12-24,Christmas Day - observed,US,full_closure,false,2026-06-01,calendar_governance,SIFMA-2027-SCHEDULE
+2026-01-01,New Year's Day,UK,full_closure,false,2025-06-02,calendar_governance,LSE-2026-SCHEDULE
+2026-04-03,Good Friday,UK,full_closure,false,2025-06-02,calendar_governance,LSE-2026-SCHEDULE
+2026-04-06,Easter Monday,UK,full_closure,false,2025-06-02,calendar_governance,LSE-2026-SCHEDULE
+2026-05-04,Early May Bank Holiday,UK,full_closure,false,2025-06-02,calendar_governance,LSE-2026-SCHEDULE
+2026-05-25,Spring Bank Holiday,UK,full_closure,false,2025-06-02,calendar_governance,LSE-2026-SCHEDULE
+2026-08-31,Summer Bank Holiday,UK,full_closure,false,2025-06-02,calendar_governance,LSE-2026-SCHEDULE
+2026-12-24,Christmas Eve - early close,UK,early_close,true,2025-06-02,calendar_governance,LSE-2026-SCHEDULE
+2026-12-25,Christmas Day,UK,full_closure,false,2025-06-02,calendar_governance,LSE-2026-SCHEDULE
+2026-12-28,Boxing Day - substitute day,UK,full_closure,false,2025-06-02,calendar_governance,LSE-2026-SCHEDULE
+2026-01-01,New Year's Day,JP,full_closure,false,2025-06-02,calendar_governance,JPX-2026-SCHEDULE
+2026-01-02,New Year Holiday,JP,full_closure,false,2025-06-02,calendar_governance,JPX-2026-SCHEDULE
+2026-01-12,Coming of Age Day,JP,full_closure,false,2025-06-02,calendar_governance,JPX-2026-SCHEDULE
+2026-02-11,National Foundation Day,JP,full_closure,false,2025-06-02,calendar_governance,JPX-2026-SCHEDULE
+2026-02-23,Emperor's Birthday,JP,full_closure,false,2025-06-02,calendar_governance,JPX-2026-SCHEDULE
+2026-04-29,Showa Day,JP,full_closure,false,2025-06-02,calendar_governance,JPX-2026-SCHEDULE
+2026-05-04,Greenery Day,JP,full_closure,false,2025-06-02,calendar_governance,JPX-2026-SCHEDULE
+2026-05-05,Children's Day,JP,full_closure,false,2025-06-02,calendar_governance,JPX-2026-SCHEDULE
+2026-05-06,Constitution Day - observed,JP,full_closure,false,2025-06-02,calendar_governance,JPX-2026-SCHEDULE
+2026-12-31,Year-end market holiday,JP,full_closure,false,2025-06-02,calendar_governance,JPX-2026-SCHEDULE
