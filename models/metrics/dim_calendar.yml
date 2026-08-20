@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: dim_business_calendar
+    description: >
+      Authoritative business-day calendar, one row per date. Derived from
+      seed_declared_holidays. Consumed by transformation models, exported to
+      AutoSys to gate batch execution, and registered as a MetricFlow time
+      spine. A change to the seed propagates to all three.
+
+    time_spine:
+      standard_granularity_column: date_day
+
+    columns:
+      - name: date_day
+        granularity: day
+        tests:
+          - unique
+          - not_null
+      - name: is_business_day
+        tests:
+          - not_null
+      - name: is_trading_day
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.expression_is_true:
+          name: assert_no_business_day_is_a_full_closure
+          arguments:
+            expression: "not (is_business_day and closure_type = 'full_closure')"
+      - dbt_utils.expression_is_true:
+          name: assert_no_business_day_falls_on_a_weekend
+          arguments:
+            expression: "not (is_business_day and is_weekend)"
+      - dbt_utils.expression_is_true:
+          name: assert_early_close_is_still_a_business_day
+          arguments:
+            expression: "not (is_early_close and not is_business_day)"
