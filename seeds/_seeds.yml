@@ -1,0 +1,63 @@
+seeds:
+  - name: seed_declared_holidays
+    description: Declared market holidays and early-close dates maintained by calendar governance.
+    config:
+      column_types:
+        holiday_date: date
+        holiday_name: varchar
+        jurisdiction: varchar(2)
+        closure_type: varchar
+        is_early_close: boolean
+        declared_at: date
+        declared_by: varchar
+        source_reference: varchar
+    columns:
+      - name: holiday_date
+        description: Calendar date on which the market closure or early close occurs.
+        data_tests:
+          - not_null
+      - name: holiday_name
+        description: Business-facing name of the holiday or closure event.
+        data_tests:
+          - not_null
+      - name: jurisdiction
+        description: Two-character jurisdiction code for the affected market.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - US
+                  - UK
+                  - JP
+      - name: closure_type
+        description: Whether the market has a full closure or closes early.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - full_closure
+                  - early_close
+      - name: is_early_close
+        description: Boolean indicating that the market closes early rather than remaining closed all day.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - true
+                  - false
+                quote: false
+      - name: declared_at
+        description: Date on which calendar governance declared the closure.
+        data_tests:
+          - not_null
+      - name: declared_by
+        description: Team or authority responsible for recording the declaration.
+        data_tests:
+          - not_null
+      - name: source_reference
+        description: Reference identifier for the source schedule or declaration.
+        data_tests:
+          - not_null

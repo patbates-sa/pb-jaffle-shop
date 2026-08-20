@@ -54,6 +54,10 @@ models:
         description: Total number of orders placed by the customer.
         data_type: number(18,0)
 
+      - name: max_number_of_orders
+        description: Maximum number of orders for the customer. At customer grain, this equals number_of_orders.
+        data_type: number(18,0)
+
       - name: lifetime_value
         description: Total lifetime revenue attributed to the customer.
         data_type: number(38,6)

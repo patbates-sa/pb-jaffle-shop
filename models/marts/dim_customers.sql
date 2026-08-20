@@ -16,7 +16,6 @@ with
             cast(sum(amount) as number(38,6)) as lifetime_value
         from orders
         group by customer_id
-
     ),
     final as (
         select
@@ -26,6 +25,7 @@ with
             customer_orders.first_order_date,
             customer_orders.most_recent_order_date,
             cast(coalesce(customer_orders.number_of_orders, 0) as number(18,0)) as number_of_orders,
+            cast(coalesce(customer_orders.number_of_orders, 0) as number(18,0)) as max_number_of_orders,
             cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value
         from customers
         left join customer_orders using (customer_id)
@@ -37,5 +37,7 @@ select
     first_order_date,
     most_recent_order_date,
     number_of_orders,
-    lifetime_value
+    max_number_of_orders,
+    lifetime_value,
+    'temp' as temp_col
 from final
