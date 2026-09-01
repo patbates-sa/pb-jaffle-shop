@@ -38,6 +38,5 @@ select
     most_recent_order_date,
     number_of_orders,
     max_number_of_orders,
-    lifetime_value,
-    'temp' as temp_col
+    lifetime_value
 from final

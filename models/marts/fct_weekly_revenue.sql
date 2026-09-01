@@ -55,7 +55,7 @@ select
     sum(case when is_trading_day then 1 else 0 end) as trading_days,
     sum(case when is_early_close then 1 else 0 end) as early_close_days,
 
-    -- The comparable measure. Denominator reflects days actually open.
+    -- The comparable measure. Denominator reflects days actually open. Just a small change
     sum(revenue) / nullif(sum(case when is_trading_day then 1 else 0 end), 0)
         as revenue_per_trading_day,
 
