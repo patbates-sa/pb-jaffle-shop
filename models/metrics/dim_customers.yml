@@ -77,3 +77,32 @@ models:
         label: Lifetime Revenue
         agg: sum
         expr: lifetime_value
+
+
+unit_tests:
+  - name: test_dim_customers_aggregates_order_rollups
+    model: dim_customers
+    given:
+      - input: ref('stg_jaffle_shop__customers')
+        rows:
+          - {customer_id: 1, first_name: Jill, last_name: Johnson}
+      - input: ref('fct_orders')
+        rows:
+          - {customer_id: 1, order_id: 101, order_date: 2024-01-03, amount: 12.5}
+          - {customer_id: 1, order_id: 102, order_date: 2024-02-10, amount: 7.5}
+          - {customer_id: 1, order_id: 103, order_date: 2024-01-20, amount: 10}
+    expect:
+      rows:
+        - {customer_id: 1, first_name: Jill, last_name: Johnson, first_order_date: 2024-01-03, most_recent_order_date: 2024-02-10, number_of_orders: 3, max_number_of_orders: 3, lifetime_value: 30}
+
+  - name: test_dim_customers_keeps_customers_without_orders
+    model: dim_customers
+    given:
+      - input: ref('stg_jaffle_shop__customers')
+        rows:
+          - {customer_id: 2, first_name: Alex, last_name: Smith}
+      - input: ref('fct_orders')
+        rows: []
+    expect:
+      rows:
+        - {customer_id: 2, first_name: Alex, last_name: Smith, first_order_date: null, most_recent_order_date: null, number_of_orders: 0, max_number_of_orders: 0, lifetime_value: null}
