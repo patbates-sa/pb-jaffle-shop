@@ -26,7 +26,8 @@ with
             customer_orders.most_recent_order_date,
             cast(coalesce(customer_orders.number_of_orders, 0) as number(18,0)) as number_of_orders,
             cast(coalesce(customer_orders.number_of_orders, 0) as number(18,0)) as max_number_of_orders,
-            cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value
+            cast(customer_orders.lifetime_value as number(38,6)) as lifetime_value,
+            customers.last_name as new_last_name
         from customers
         left join customer_orders using (customer_id)
     )
